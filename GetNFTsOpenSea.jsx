@@ -1,3 +1,5 @@
+// Initializes a state object with properties such as contract, api_key, allNFTS, and init.
+// This sets up the initial state of the component.
 State.init({
   contract: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
   api_key: "c19f1YSp1FKWlhQHi4gAx0DbxkFM2r48",
@@ -5,10 +7,14 @@ State.init({
   init: false,
 });
 
+// This line defines a constant loadingUrl which holds a URL to an image used as a loading indicator if the image for a token is not available.
+// It uses a default value if props.loadingUrl is not provided.
 const loadingUrl =
   props.loadingUrl ??
   "https://ipfs.near.social/ipfs/bafkreidoxgv2w7kmzurdnmflegkthgzaclgwpiccgztpkfdkfzb4265zuu";
 
+// Function to fetch NFTs for a given contract address using an API.
+// It updates the allNFTS and init properties of the state object.
 const getNFTsForContract = () => {
   asyncFetch(
     "https://eth-mainnet.g.alchemy.com/nft/v3/" +
@@ -26,13 +32,11 @@ const getNFTsForContract = () => {
   )
     .then(({ body }) => {
       if (body) {
-        console.log("1");
         State.update({
           allNFTS: body.nfts,
           init: true,
         });
       } else {
-        console.log("2");
         State.update({
           allNFTS: null,
           init: true,
@@ -42,6 +46,7 @@ const getNFTsForContract = () => {
     .catch((err) => console.log(err));
 };
 
+// Finally we render the component where we iterate the allNFTS array to show the information of each of the tokens.
 return (
   <div>
     <h1>BOS + OpenSea</h1>
