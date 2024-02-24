@@ -46,4 +46,4 @@ Example:
     .catch((err) => console.log(err));
 ```
 
-BOS Widget: https://near.org/owa-is-bos.near/widget/BOS-OpenSea
+BOS Widget: https://near.social/owa-is-bos.near/widget/BOS-OpenSea
